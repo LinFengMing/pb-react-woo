@@ -1,14 +1,10 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
 } from "react-router-dom";
 
 import Nav from './view/layout/nav.jsx';
-import HomePage from './view/home/homePage.jsx';
+import AppRouters from './view/layout/appRouters.jsx';
 import './App.scss';
 
 function App() {
@@ -16,9 +12,7 @@ function App() {
   <Router>
     <Nav />
     <main className="mdc-top-app-bar--fixed-adjust">
-      <div className="App">
-        <HomePage />
-      </div>
+      <AppRouters />
     </main>
   </Router>
   );
