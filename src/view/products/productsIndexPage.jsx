@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ProductCardList from './components/productCardList.jsx';
 import ProductService from '../../services/productService.js';
 
 const productService = new ProductService();
@@ -9,7 +10,10 @@ function ProductsIndexPage() {
     useEffect(() => {
         const loadFunc = async () => {
             const result = await productService.getProducts(1);
-            console.log(result);
+            setProducts([
+                ...products,
+                ...result
+            ]);
         };
 
         loadFunc();
@@ -17,8 +21,8 @@ function ProductsIndexPage() {
     }, [productService]);
 
     return (
-    <div>
-        ProductsIndexPage
+    <div style={{maxWidth: "1200px", margin: "auto"}}>
+        <ProductCardList products={products} />
     </div>
     );
 }
