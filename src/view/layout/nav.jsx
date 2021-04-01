@@ -1,19 +1,14 @@
 import React, {useState} from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
-  Redirect
 } from "react-router-dom";
 import TopAppBar, {
-  TopAppBarFixedAdjust,
   TopAppBarIcon,
   TopAppBarRow,
   TopAppBarSection,
   TopAppBarTitle,
 } from '@material/react-top-app-bar';
-import List, {ListItem, ListItemText} from '@material/react-list';
+import List, {ListItem} from '@material/react-list';
 import Drawer from '@material/react-drawer';
 import MaterialIcon from '@material/react-material-icon';
 
