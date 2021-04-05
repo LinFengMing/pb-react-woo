@@ -4,7 +4,6 @@ import {
   Route,
 } from "react-router-dom";
 
-
 import HomePage from '../home/homePage.jsx';
 import ProductsIndexPage from '../products/productsIndexPage.jsx';
 import ProductsShowPage from '../products/productsShowPage.jsx';
@@ -17,7 +16,6 @@ import CheckoutPage from '../cart/checkoutPage.jsx';
 import NoMatch from '../errors/404.jsx';
 
 function Routers() {
-
   return (
   <>
     <Switch>
