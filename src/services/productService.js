@@ -27,6 +27,18 @@ class ProductService {
                 return [];
             });
     }
+
+    getProductById(id) {
+        return WooCommerce
+            .get(`products/${id}`)
+            .then((response) => {
+                return new Product(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+                return null;
+            });
+    }
 }
 
 export default ProductService;

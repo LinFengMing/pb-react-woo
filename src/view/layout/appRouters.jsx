@@ -3,7 +3,6 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-
 import HomePage from '../home/homePage.jsx';
 import ProductsIndexPage from '../products/productsIndexPage.jsx';
 import ProductsShowPage from '../products/productsShowPage.jsx';

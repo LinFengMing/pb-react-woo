@@ -4,23 +4,10 @@ import Card, {
     CardPrimaryContent,
     CardMedia,
     CardActions,
-    CardActionButtons,
-    CardActionIcons
+    CardActionButtons
 } from "@material/react-card";
 import Button from '@material/react-button';
-
-function OnSalePriceString({product}) {
-    return (
-        <div>
-            <del style={{color: "red"}}>
-                {product.regularPrice}
-            </del>
-            <b>
-                ${product.price}
-            </b>
-        </div>
-    );
-}
+import OnSalePriceString from './OnSalePriceString.jsx';
 
 function ProductCard({product}) {
     const url = `/products/${product.id}`;

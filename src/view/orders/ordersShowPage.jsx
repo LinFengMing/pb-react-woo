@@ -1,12 +1,11 @@
 import React from 'react';
 
 function OrdersShowPage() {
-
     return (
-    <div>
-        OrdersShowPage
-    </div>
+        <div>
+            OrdersShowPage
+        </div>
     );
-  }
+}
 
 export default OrdersShowPage;

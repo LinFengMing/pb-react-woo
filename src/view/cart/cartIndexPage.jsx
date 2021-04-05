@@ -1,12 +1,11 @@
 import React from 'react';
 
 function CartIndexPage() {
-
     return (
-    <div>
-        CartIndexPage
-    </div>
+        <div>
+            CartIndexPage
+        </div>
     );
-  }
+}
 
 export default CartIndexPage;

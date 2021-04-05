@@ -1,12 +1,11 @@
 import React from 'react';
 
 function OrderSuccessPage() {
-
     return (
-    <div>
-        OrderSuccessPage
-    </div>
+        <div>
+            OrderSuccessPage
+        </div>
     );
-  }
+}
 
 export default OrderSuccessPage;

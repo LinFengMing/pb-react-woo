@@ -10,7 +10,6 @@ function ProductsIndexPage() {
     let isInit = useRef(false);
     let page = useRef(1);
     let isLastPage = useRef(false);
-
     const [products, setProducts] = useState([]);
 
     const loadMoreProducts = useCallback(async () => {
