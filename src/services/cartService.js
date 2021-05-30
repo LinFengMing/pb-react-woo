@@ -26,10 +26,10 @@ class CartService {
     }
 
     getCartItem = (productId) => {
-        //const productIdKey = parseInt(productId)
+        const productIdKey = parseInt(productId)
         const cartItem = this.cart[productId]
-        if (!cartItem || !this.isCartItemValid(cartItem, productId)){
-            this.removeCartItem(productId)
+        if (!cartItem || !this.isCartItemValid(cartItem, productIdKey)){
+            this.removeCartItem(productIdKey)
             return
         }
 
@@ -64,11 +64,11 @@ class CartService {
         return !(cartItem.productId !== productId || cartItem.quantity <= 0)
     }
 
-    // getCartItems = () => {
-    //     return Object.keys(this.cart).map((productId) => {
-    //         return this.getCartItem(productId)
-    //     }).filter(x => x)
-    // }
+    getCartItems = () => {
+        return Object.keys(this.cart).map((productId) => {
+            return this.getCartItem(productId)
+        }).filter(x => x)
+    }
 }
 
 export default CartService

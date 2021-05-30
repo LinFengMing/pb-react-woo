@@ -11,6 +11,7 @@ import TopAppBar, {
 import List, {ListItem} from '@material/react-list';
 import Drawer from '@material/react-drawer';
 import MaterialIcon from '@material/react-material-icon';
+import CartItemsPopUp from './cartItemsPopup.jsx';
 
 function Nav() {
     const [open, setOpen] = useState(false);
@@ -56,6 +57,15 @@ function Nav() {
                         React Hooks
                     </TopAppBarTitle>
                 </TopAppBarSection>
+
+                <TopAppBarSection align='end' role='toolbar'>
+                    <TopAppBarIcon tabIndex={0}>
+                        <div style={{marginRight: "32px"}}>
+                            <CartItemsPopUp />
+                        </div>
+                    </TopAppBarIcon>
+                </TopAppBarSection>
+
             </TopAppBarRow>
         </TopAppBar>
     </>

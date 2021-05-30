@@ -39,6 +39,25 @@ class ProductService {
                 return null;
             });
     }
+
+    getProductsByIds(ids) {
+        return WooCommerce
+            .get(`products`, {
+                per_page: 100,
+                include: ids
+            })
+            .then((response) => {
+                const products = response.data.map((rawData) => {
+                    return new Product(rawData);
+                });
+
+                return products;
+            })
+            .catch((error) => {
+                console.log(error);
+                return null;
+            });
+    }
 }
 
 export default ProductService;

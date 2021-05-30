@@ -44,7 +44,9 @@
   "devDependencies": {
     "@material/react-button": "^0.15.0",
     "@material/react-card": "^0.15.0",
+    "@material/react-chips": "^0.15.0",
     "@material/react-layout-grid": "^0.15.0",
+    "@material/react-menu-surface": "^0.15.0",
     "@material/react-select": "^0.15.0",
     "js-cookie": "^2.2.1",
     "node-sass": "^5.0.0"
