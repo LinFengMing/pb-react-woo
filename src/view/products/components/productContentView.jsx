@@ -2,7 +2,10 @@ import React, { useState, useCallback } from 'react';
 import {Cell, Grid, Row} from '@material/react-layout-grid';
 import Button from '@material/react-button';
 import Select, {Option} from '@material/react-select';
+import CartService from '../../../services/cartService.js';
 import OnSalePriceString from './OnSalePriceString.jsx';
+
+const cartService = new CartService();
 
 function ProductContentView({product}) {
     const [quantity, setQuantity] = useState(1);
@@ -13,8 +16,9 @@ function ProductContentView({product}) {
     }, []);
 
     const addInCart = useCallback((e) => {
-        console.log('add');
-    }, []);
+        cartService.addInCart(product.id, quantity);
+        window.location.replace('/products');
+    });
 
     const priceElement = product.onSale ? <OnSalePriceString product={product} /> : (<> ${product.price} </>);
 

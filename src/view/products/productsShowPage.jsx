@@ -1,8 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import {
-    Redirect,
-  useParams,
-} from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import ProductContentView from './components/productContentView.jsx';
 import LoadingView from '../layout/loadingView';
 import ProductService from '../../services/productService.js';
