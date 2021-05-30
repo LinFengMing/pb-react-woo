@@ -1,14 +1,17 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import {Cell, Grid, Row} from '@material/react-layout-grid';
 import Button from '@material/react-button';
 import Select, {Option} from '@material/react-select';
 import CartService from '../../../services/cartService.js';
 import OnSalePriceString from './OnSalePriceString.jsx';
+import CartContext from '../../../context/cartContext.jsx';
+import CartItemDetail from '../../../models/cartItemDetail.js';
 
 const cartService = new CartService();
 
 function ProductContentView({product}) {
     const [quantity, setQuantity] = useState(1);
+    const [cartItemDetails, setCartItemDetails] = useContext(CartContext);
 
     const selectQuantity = useCallback((e) => {
         const { value } = e.target;
@@ -16,8 +19,27 @@ function ProductContentView({product}) {
     }, []);
 
     const addInCart = useCallback((e) => {
+        if (cartService.getCartItem(product.id)) {
+            const newValue = cartItemDetails.map((item) => {
+                if (item.product.id === product.id) {
+                    return new CartItemDetail(product, item.quantity + parseInt(quantity))
+                } else {
+                    return item;
+                }
+            })
+
+            setCartItemDetails(newValue);
+        } else {
+            setCartItemDetails(
+                [
+                    ...cartItemDetails,
+                    new CartItemDetail(product, parseInt(quantity))
+                ]
+            )
+        }
+
         cartService.addInCart(product.id, quantity);
-        window.location.replace('/products');
+        //window.location.replace('/products');
     });
 
     const priceElement = product.onSale ? <OnSalePriceString product={product} /> : (<> ${product.price} </>);

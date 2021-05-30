@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from "react-router-dom";
 import MenuSurface, { Corner } from '@material/react-menu-surface';
 import MaterialIcon from '@material/react-material-icon';
@@ -7,6 +7,7 @@ import { Chip } from '@material/react-chips';
 import CartService from '../../services/cartService'
 import ProductService from '../../services/productService'
 import CartItemDetail from '../../models/cartItemDetail'
+import CartContext from '../../context/cartContext.jsx';
 
 const cartService = new CartService()
 const productService = new ProductService()
@@ -14,7 +15,7 @@ const productService = new ProductService()
 const CartItemsPopUp = () => {
     const [open, setOpen] = useState(false)
     const [anchorElement, setAnchorElement] = useState(null)
-    const [cartItemDetails, setCartItemDetails] = useState([])
+    const [cartItemDetails, setCartItemDetails] = useContext(CartContext);
 
     const count = cartItemDetails.reduce((sum, item) => {
        return sum + item.quantity
