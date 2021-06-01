@@ -5,13 +5,12 @@ import Select, {Option} from '@material/react-select';
 import CartService from '../../../services/cartService.js';
 import OnSalePriceString from './OnSalePriceString.jsx';
 import CartContext from '../../../context/cartContext.jsx';
-import CartItemDetail from '../../../models/cartItemDetail.js';
 
 const cartService = new CartService();
 
 function ProductContentView({product}) {
     const [quantity, setQuantity] = useState(1);
-    const [cartItemDetails, setCartItemDetails] = useContext(CartContext);
+    const [cartItemDetails, setCartItemDetails, mergeDataWithToCartItemsDetail] = useContext(CartContext);
 
     const selectQuantity = useCallback((e) => {
         const { value } = e.target;
@@ -19,28 +18,24 @@ function ProductContentView({product}) {
     }, []);
 
     const addInCart = useCallback((e) => {
-        if (cartService.getCartItem(product.id)) {
-            const newValue = cartItemDetails.map((item) => {
-                if (item.product.id === product.id) {
-                    return new CartItemDetail(product, item.quantity + parseInt(quantity))
-                } else {
-                    return item;
-                }
-            })
+        const quantityForSubmit = parseInt(quantity)
+        const newCartItemDetails = mergeDataWithToCartItemsDetail(
+            cartItemDetails,
+            product,
+            quantityForSubmit
+        )
 
-            setCartItemDetails(newValue);
-        } else {
-            setCartItemDetails(
-                [
-                    ...cartItemDetails,
-                    new CartItemDetail(product, parseInt(quantity))
-                ]
-            )
-        }
+        setCartItemDetails(newCartItemDetails)
 
-        cartService.addInCart(product.id, quantity);
-        //window.location.replace('/products');
-    });
+        cartService.addInCart(product.id, quantityForSubmit)
+        // window.location.replace("/products")
+    }, [
+        cartItemDetails,
+        mergeDataWithToCartItemsDetail,
+        product,
+        quantity,
+        setCartItemDetails
+    ]);
 
     const priceElement = product.onSale ? <OnSalePriceString product={product} /> : (<> ${product.price} </>);
 

@@ -43,7 +43,7 @@ const CartItemsPopUp = () => {
         }
 
         loadCartItemsDetail()
-    }, [productService])
+    }, [setCartItemDetails])
 
     return (
         <div
