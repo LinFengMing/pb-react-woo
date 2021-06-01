@@ -8,8 +8,8 @@ import List, {
 } from '@material/react-list';
 import MaterialIcon from '@material/react-material-icon';
 import Select, { Option } from '@material/react-select';
-import CartContext from '../../../context/cartContext'
-import CartService from '../../../services/cartService'
+import CartContext from '../../../context/cartContext';
+import CartService from '../../../services/cartService';
 
 const cartService = new CartService()
 
@@ -68,7 +68,7 @@ const CartItemsList = () => {
                                                 一些額外資訊......
                                             </span>
                                         </span>
-                                        <ListItemMeta meta="" />
+                                        <ListItemMeta meta={`$${product.price}`} style={{ marginRight: "16px", color: "red" }} />
                                         <QuantitySelector
                                             value={quantity}
                                             onChange={
