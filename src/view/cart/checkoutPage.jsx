@@ -72,7 +72,16 @@ const CheckoutPage = () => {
             <Button outlined onClick={
                 (e) => {
                     setSubmitting(true)
-                    orderService.submitOrder(data)
+                    const submitOrder = async () => {
+                        const order = await orderService.submitOrder(data)
+                        if (order) {
+                            cartService.clearCartItems()
+                            window.location.replace(`/orders/${order.id}/success`)
+                        } else {
+                            window.location.replace(`/orders/failed`)
+                        }
+                    }
+                    submitOrder()
                 }
             }
                 disabled={submitting}

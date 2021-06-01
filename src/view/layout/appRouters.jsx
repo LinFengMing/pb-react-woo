@@ -30,14 +30,14 @@ function Routers() {
       <Route path='/orders' exact>
         <OrdersIndexPage />
       </Route>
-      <Route path='/orders/:id' exact>
-        <OrdersShowPage />
-      </Route>
       <Route path='/orders/:id/success' exact>
         <OrderSuccessPage />
       </Route>
-      <Route path='/orders/:id/failed' exact>
+      <Route path='/orders/failed' exact>
         <OrderFailedPage />
+      </Route>
+      <Route path='/orders/:id' exact>
+        <OrdersShowPage />
       </Route>
       <Route path='/cart' exact>
         <CartIndexPage />

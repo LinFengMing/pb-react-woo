@@ -1,4 +1,5 @@
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api"; // Supports ESM
+import Order from '../models/order.js';
 
 const WooCommerce = new WooCommerceRestApi({
     url: 'http://192.168.56.10/', // Your store URL
@@ -12,12 +13,22 @@ class OrderService {
         return WooCommerce
             .post("orders", data)
             .then((response) => {
-                console.log(response.data);
+                return new Order(response.data);
             })
             .catch((error) => {
                 console.log(error);
                 return null;
             });
+    }
+
+    getOrder = (id) => {
+        return WooCommerce.get(`orders/${id}`)
+        .then((response) => {
+            return new Order(response.data);
+        }).catch((error) => {
+            console.log(error);
+            return null
+        });
     }
 
     getPaymentGatways = () => {

@@ -6,8 +6,7 @@ class CartService {
     constructor () {
         this.cart = Cookies.get(CART_KEY)
         if (this.cart == null) {
-            this.cart = {}
-            this.save()
+            this.clearCartItems();
         } else {
             this.cart = JSON.parse(this.cart)
         }
@@ -55,10 +54,10 @@ class CartService {
         this.save()
     }
 
-    // clearCartItems = () => {
-    //     this.cart = {}
-    //     this.save()
-    // }
+    clearCartItems = () => {
+        this.cart = {}
+        this.save()
+    }
 
     isCartItemValid = (cartItem, productId) => {
         return !(cartItem.productId !== productId || cartItem.quantity <= 0)
