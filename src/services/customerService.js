@@ -35,7 +35,21 @@ class CustomerService {
         this.saveToCustomerStorage()
     }
 
-    get isLoggedIn (){
+    setShouldBackToCheckout = () => {
+        this.customerStorage["setShouldBackToCheckout"] = true
+        this.saveToCustomerStorage()
+    }
+
+    clearShouldBackToCheckout = () => {
+        this.customerStorage["setShouldBackToCheckout"] = null
+        this.saveToCustomerStorage()
+    }
+
+    get shouldBackToCheckout () {
+        return !!this.customerStorage["setShouldBackToCheckout"]
+    }
+
+    get isLoggedIn () {
         return this.getCustomerIdFromCookie() !== null
     }
 
@@ -77,7 +91,6 @@ class CustomerService {
     }
 
     logOut = () => {
-        this.customerStorage["customerId"] = null
         this.saveToCustomerStorage()
     }
 

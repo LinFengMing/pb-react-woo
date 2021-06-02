@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react'
 import OrderService from '../../services/orderService'
 import ProductService from '../../services/productService'
+import CustomerService from '../../services/customerService'
 import LoadingView from '../layout/loadingView'
 import Button from '@material/react-button'
 import {
@@ -11,6 +12,7 @@ import {
 
 const orderService = new OrderService()
 const productService = new ProductService()
+const customerService = new CustomerService()
 
 const OrderContentView = ({ order }) => {
     const isInited = useRef(false)
@@ -100,7 +102,7 @@ const OrderShowPage = () => {
 
     useEffect(() => {
         const loadFun = async () => {
-            const result = await orderService.getOrder(id)
+            const result = await orderService.getOrder(id, customerService.getCustomerIdFromCookie())
             isInited.current = true
             setOrder(result)
         }

@@ -10,6 +10,12 @@ const WooCommerce = new WooCommerceRestApi({
 
 class OrderService {
     submitOrder = (data) => {
+        if (!data.customer_id) {
+            return new Promise((resolve) => {
+                resolve(null);
+            })
+        }
+
         return WooCommerce
             .post("orders", data)
             .then((response) => {
@@ -21,18 +27,43 @@ class OrderService {
             });
     }
 
-    getOrder = (id) => {
-        return WooCommerce.get(`orders/${id}`)
+    getOrder = (id, customer_id = null) => {
+        if (!customer_id) {
+            return new Promise((resolve) => {
+                resolve(null);
+            })
+        }
+
+        return WooCommerce.get(`orders` ,{
+            customer: customer_id,
+            include: [id]
+        })
         .then((response) => {
-            return new Order(response.data);
+            const result = response.data.map((rawData) => {
+                return new Order(rawData);
+            });
+
+            if(result.length > 0) {
+                return result[0]
+            } else {
+                return null;
+            }
         }).catch((error) => {
             console.log(error);
             return null
         });
     }
 
-    getOrders = () => {
-        return WooCommerce.get(`orders`)
+    getOrders = (customer_id) => {
+        if (!customer_id) {
+            return new Promise((resolve) => {
+                resolve(null);
+            })
+        }
+
+        return WooCommerce.get(`orders`,{
+            customer: customer_id
+        })
         .then((response) => {
             return response.data.map((rawData) => {
                 return new Order(rawData);

@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react'
 import LoadingView from '../layout/loadingView'
 import OrderService from '../../services/orderService'
+import CustomerService from '../../services/customerService'
 import Card, {
     CardPrimaryContent,
     CardActions,
@@ -17,6 +18,7 @@ import {
 } from "react-router-dom";
 
 const orderService = new OrderService()
+const customerService = new CustomerService()
 
 const OrdersContentView = ({ orders }) => {
     return (
@@ -63,7 +65,7 @@ const OrdersIndexPage = () => {
 
     useEffect(() => {
         const loadFun = async () => {
-            const result = await orderService.getOrders()
+            const result = await orderService.getOrders(customerService.getCustomerIdFromCookie())
             isInited.current = true
             setOrders(result)
         }

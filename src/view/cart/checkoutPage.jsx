@@ -3,9 +3,12 @@ import Button from '@material/react-button'
 import CartContext from '../../context/cartContext'
 import OrderService from '../../services/orderService'
 import CartService from '../../services/cartService'
+import CustomerService from '../../services/customerService'
+import IsLogInContext from '../../context/isLogInContext'
 
 const orderService = new OrderService()
 const cartService = new CartService()
+const customerService = new CustomerService()
 
 const data = {
     payment_method: "bacs",
@@ -40,7 +43,8 @@ const data = {
             method_title: "Flat Rate",
             total: "10"
         }
-    ]
+    ],
+    customer_id: customerService.getCustomerIdFromCookie()
 };
 
 const CheckoutPage = () => {
@@ -48,6 +52,7 @@ const CheckoutPage = () => {
     const [cartItemDetails] = useContext(CartContext)
     const { shipping } = data
     const buttonText = (submitting) ? "結帳中...請稍後" : "結帳"
+    const [isLogin, setIsLogin] = useContext(IsLogInContext)
 
     data.line_items = cartItemDetails.map((item) => {
         return {
@@ -60,6 +65,13 @@ const CheckoutPage = () => {
         orderService.getPaymentGatways()
         orderService.getShippingMethods()
     }, [])
+
+    if (!isLogin) {
+        customerService.setShouldBackToCheckout()
+        window.location.replace('/login')
+
+        return null
+    }
 
     return (
         <div style={{ margin: "auto", maxWidth: "1200px", textAlign: "center" }}>

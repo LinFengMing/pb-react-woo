@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react'
 import OrderService from '../../services/orderService'
+import CustomerService from '../../services/customerService'
 import LoadingView from '../layout/loadingView'
 import Button from '@material/react-button'
 import {
@@ -9,6 +10,7 @@ import {
 } from "react-router-dom";
 
 const orderService = new OrderService()
+const customerService = new CustomerService()
 
 const OrderSuccessContentView = ({order}) => {
     return (
@@ -38,7 +40,7 @@ const OrderSuccessPage = () => {
 
     useEffect(() => {
         const loadFun = async () => {
-            const result = await orderService.getOrder(id)
+            const result = await orderService.getOrder(id, customerService.getCustomerIdFromCookie())
             isInited.current = true
             setOrder(result)
         }

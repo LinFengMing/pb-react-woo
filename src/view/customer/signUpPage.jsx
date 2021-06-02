@@ -32,12 +32,19 @@ const SignUpPage = () => {
             last_name: uiStatus.last_name,
             username: `${uiStatus.first_name} ${uiStatus.last_name}`
         })
+
         if (customerService.isLoggedIn) {
             setIsLogin(customerService.isLoggedIn)
             window.location.replace("/")
         } else {
             alert('註冊失敗')
         }
+    }
+
+    if (isLogin) {
+        window.location.replace('/')
+
+        return null
     }
 
     return (

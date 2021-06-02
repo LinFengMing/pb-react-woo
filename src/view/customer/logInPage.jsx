@@ -27,8 +27,20 @@ function LogInPage() {
         const result = await customerService.logIn(uiStatus.email, uiStatus.password)
         if(customerService.isLoggedIn){
             setIsLogin(customerService.isLoggedIn)
-            window.location.replace("/")
+
+            if (customerService.setShouldBackToCheckout()) {
+                customerService.clearShouldBackToCheckout()
+                window.location.replace("/checkout")
+            } else {
+                window.location.replace("/")
+            }
         }
+    }
+
+    if (isLogin) {
+        window.location.replace('/')
+
+        return null
     }
 
     return (
