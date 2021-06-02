@@ -7,6 +7,7 @@ import {
 import HomePage from '../home/homePage.jsx';
 import ProductsIndexPage from '../products/productsIndexPage.jsx';
 import ProductsShowPage from '../products/productsShowPage.jsx';
+import ProductSearchPage from '../products/productSearchPage.jsx';
 import OrdersIndexPage from '../orders/ordersIndexPage.jsx';
 import OrdersShowPage from '../orders/ordersShowPage.jsx';
 import OrderSuccessPage from '../orders/orderSuccessPage.jsx';
@@ -32,6 +33,9 @@ function Routers() {
                 </Route>
                 <Route path='/products' exact>
                     <ProductsIndexPage />
+                </Route>
+                <Route path="/products/search" exact>
+                    <ProductSearchPage />
                 </Route>
                 <Route path='/products/:id' exact>
                     <ProductsShowPage />

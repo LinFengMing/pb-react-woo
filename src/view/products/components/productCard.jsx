@@ -7,7 +7,7 @@ import Card, {
     CardActionButtons
 } from "@material/react-card";
 import Button from '@material/react-button';
-import OnSalePriceString from './OnSalePriceString.jsx';
+import OnSalePriceString from './onSalePriceString.jsx';
 
 function ProductCard({product}) {
     const url = `/products/${product.id}`;

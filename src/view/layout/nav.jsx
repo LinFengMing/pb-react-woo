@@ -36,6 +36,9 @@ function Nav() {
                 <Link to='/products'>
                     <ListItem>所有商品</ListItem>
                 </Link>
+                <Link to='/products/search'>
+                    <ListItem>搜尋商品</ListItem>
+                </Link>
                 <Link to='/cart'>
                     <ListItem>購物車</ListItem>
                 </Link>

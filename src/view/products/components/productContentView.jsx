@@ -3,7 +3,7 @@ import {Cell, Grid, Row} from '@material/react-layout-grid';
 import Button from '@material/react-button';
 import Select, {Option} from '@material/react-select';
 import CartService from '../../../services/cartService.js';
-import OnSalePriceString from './OnSalePriceString.jsx';
+import OnSalePriceString from './onSalePriceString.jsx';
 import CartContext from '../../../context/cartContext.jsx';
 
 const cartService = new CartService();
