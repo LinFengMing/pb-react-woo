@@ -14,6 +14,7 @@ import OrderFailedPage from '../orders/orderFailedPage.jsx';
 import CartIndexPage from '../cart/cartIndexPage.jsx';
 import CheckoutPage from '../cart/checkoutPage.jsx';
 import CustomerLoginPage from '../customer/logInPage.jsx';
+import CustomerSignUpPage from '../customer/signUpPage.jsx';
 import NoMatch from '../errors/404.jsx';
 import IsLogInContext from '../../context/isLogInContext';
 import CustomerService from '../../services/customerService'
@@ -55,6 +56,9 @@ function Routers() {
                 </Route>
                 <Route path="/login" exact>
                     <CustomerLoginPage />
+                </Route>
+                <Route path="/signup" exact>
+                    <CustomerSignUpPage />
                 </Route>
                 <Route
                     path="/logout" exact

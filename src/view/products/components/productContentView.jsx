@@ -28,7 +28,7 @@ function ProductContentView({product}) {
         setCartItemDetails(newCartItemDetails)
 
         cartService.addInCart(product.id, quantityForSubmit)
-        // window.location.replace("/products")
+        window.location.replace("/products")
     }, [
         cartItemDetails,
         mergeDataWithToCartItemsDetail,

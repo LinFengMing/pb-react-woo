@@ -5,9 +5,9 @@ import Cookies from 'js-cookie'
 const CUSTOMER_KEY = "customer"
 
 const WooCommerce = new WooCommerceRestApi({
-    url: 'http://localhost:8888/', // Your store URL
-    consumerKey: 'ck_8a975027f857d4a90efdaa8853ebb08d7991f9c6', // Your consumer key
-    consumerSecret: 'cs_fff0d151dbf8b52f7d615e0819cba4c5a1c7692a', // Your consumer secret
+    url: 'http://192.168.56.10/', // Your store URL
+    consumerKey: 'ck_a45dccafe3f03eb0335129ddf8ae6464ff637b67', // Your consumer key
+    consumerSecret: 'cs_720106a5298531eabbe761540616d8f02a07539e', // Your consumer secret
     version: 'wc/v3' // WooCommerce WP REST API version
 });
 
@@ -35,7 +35,7 @@ class CustomerService {
         this.saveToCustomerStorage()
     }
 
-    isLoggedIn = () => {
+    get isLoggedIn (){
         return this.getCustomerIdFromCookie() !== null
     }
 
@@ -48,12 +48,10 @@ class CustomerService {
             .then((response) => {
                 const customer = new Customer(response.data)
                 this.setCustomerIdToCookie(customer.id)
-
                 return customer
             })
             .catch((error) => {
                 console.log(error.response.data);
-
                 return null
             });
     }
@@ -67,7 +65,6 @@ class CustomerService {
                 if (response.data.length > 0) {
                     const customer = new Customer(response.data[0])
                     this.setCustomerIdToCookie(customer.id)
-
                     return customer
                 } else {
                     return null
@@ -82,6 +79,19 @@ class CustomerService {
     logOut = () => {
         this.customerStorage["customerId"] = null
         this.saveToCustomerStorage()
+    }
+
+    signUp = (data) => {
+        return WooCommerce.post("customers", data)
+            .then((response) => {
+                const customer = new Customer(response.data)
+                this.setCustomerIdToCookie(customer.id)
+                return customer
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+                return null
+            });
     }
 }
 

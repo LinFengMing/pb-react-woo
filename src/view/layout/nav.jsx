@@ -52,9 +52,14 @@ function Nav() {
                             </Link>
                         </>
                     ) : (
-                            <Link to="/login">
-                                <ListItem>登入</ListItem>
-                            </Link>
+                            <>
+                                <Link to="/login">
+                                    <ListItem>登入</ListItem>
+                                </Link>
+                                <Link to="/signup">
+                                    <ListItem>註冊</ListItem>
+                                </Link>
+                            </>
                         )
                 }
             </List>
