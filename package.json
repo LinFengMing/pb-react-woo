@@ -48,6 +48,7 @@
     "@material/react-layout-grid": "^0.15.0",
     "@material/react-menu-surface": "^0.15.0",
     "@material/react-select": "^0.15.0",
+    "@material/react-text-field": "^0.15.0",
     "js-cookie": "^2.2.1",
     "node-sass": "^5.0.0"
   }

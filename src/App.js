@@ -4,10 +4,13 @@ import './App.scss';
 import Nav from './view/layout/nav.jsx';
 import AppRouters from './view/layout/appRouters.jsx';
 import CartContext from './context/cartContext.jsx';
-import CartService from './services/cartService'
-import CartItemDetail from './models/cartItemDetail'
+import IsLogInContext from './context/isLogInContext.jsx';
+import CartService from './services/cartService.js'
+import CustomerService from './services/customerService.js'
+import CartItemDetail from './models/cartItemDetail.js'
 
 const cartService = new CartService()
+const customerService = new CustomerService()
 
 const mergeDataWithToCartItemsDetail = (
     cartItemDetails,
@@ -47,16 +50,19 @@ const mergeDataWithToCartItemsDetail = (
 
 function App() {
     const [cartItemDetails, setCartItemDetails] = useState([]);
+    const [isLogIn, setIsLogIn] = useState(customerService.isLoggedIn)
 
     return (
-        <CartContext.Provider value={[cartItemDetails, setCartItemDetails, mergeDataWithToCartItemsDetail]}>
-            <Router>
-                <Nav />
-                <main className="mdc-top-app-bar--fixed-adjust">
-                    <AppRouters />
-                </main>
-            </Router>
-        </CartContext.Provider>
+        <IsLogInContext.Provider value={[isLogIn, setIsLogIn]}>
+            <CartContext.Provider value={[cartItemDetails, setCartItemDetails, mergeDataWithToCartItemsDetail]}>
+                <Router>
+                    <Nav />
+                    <main className="mdc-top-app-bar--fixed-adjust">
+                        <AppRouters />
+                    </main>
+                </Router>
+            </CartContext.Provider>
+        </IsLogInContext.Provider>
     );
 }
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Link,
 } from "react-router-dom";
@@ -12,9 +12,11 @@ import List, {ListItem} from '@material/react-list';
 import Drawer from '@material/react-drawer';
 import MaterialIcon from '@material/react-material-icon';
 import CartItemsPopUp from './cartItemsPopup.jsx';
+import IsLogInContext from '../../context/isLogInContext';
 
 function Nav() {
     const [open, setOpen] = useState(false);
+    const [isLogin, setIsLogin] = useContext(IsLogInContext)
 
     return (
     <>
@@ -37,9 +39,24 @@ function Nav() {
                 <Link to='/cart'>
                     <ListItem>購物車</ListItem>
                 </Link>
-                <Link to='/orders'>
-                    <ListItem>歷史訂單</ListItem>
-                </Link>
+                {
+                    isLogin ? (
+                        <>
+                            <Link to="/orders">
+                                <ListItem>歷史訂單</ListItem>
+                            </Link>
+                            <Link to="/logout">
+                                <ListItem>
+                                    登出
+                                </ListItem>
+                            </Link>
+                        </>
+                    ) : (
+                            <Link to="/login">
+                                <ListItem>登入</ListItem>
+                            </Link>
+                        )
+                }
             </List>
         </Drawer>
         <TopAppBar>
