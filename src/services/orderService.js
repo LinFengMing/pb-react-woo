@@ -31,6 +31,18 @@ class OrderService {
         });
     }
 
+    getOrders = () => {
+        return WooCommerce.get(`orders`)
+        .then((response) => {
+            return response.data.map((rawData) => {
+                return new Order(rawData);
+            });
+        }).catch((error) => {
+            console.log(error);
+            return null
+        });
+    }
+
     getPaymentGatways = () => {
         return WooCommerce.get("payment_gateways")
             .then((response) => {
