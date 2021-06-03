@@ -9,6 +9,11 @@
 @import '~@material/react-menu-surface/dist/menu-surface.css';
 @import "~@material/react-chips/dist/chips.css";
 @import '~@material/react-text-field/dist/text-field.css';
+@import '~@material/react-typography/dist/typography.css';
+
+.mdc-list-item.mdc-ripple-upgraded{
+  width: 100%;
+}
 
 a {
   text-decoration: none;
