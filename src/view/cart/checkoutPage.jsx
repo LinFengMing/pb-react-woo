@@ -3,7 +3,7 @@ import Button from '@material/react-button'
 import CartContext from '../../context/cartContext'
 import OrderService from '../../services/orderService'
 import CartService from '../../services/cartService'
-import CheckoutInfoEditorContainer from './components/class/checkoutInfoEditorContainer'
+import CheckoutInfoEditorContainer from './components/hooks/checkoutInfoEditorContainer'
 import ExtraCheckoutInfroContext from '../../context/extraCheckoutInfroContext'
 import CheckoutInfoContext from '../../context/checkoutInfoContext'
 
