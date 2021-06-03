@@ -1,5 +1,8 @@
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api"; // Supports ESM
 import Order from '../models/order.js';
+import PaymentGateway from '../models/paymentGatway'
+import ShippingZone from '../models/shippingZone'
+import ShippingZoneMethod from '../models/shippingZoneMethod'
 
 const WooCommerce = new WooCommerceRestApi({
     url: 'http://192.168.56.10/', // Your store URL
@@ -77,7 +80,13 @@ class OrderService {
     getPaymentGatways = () => {
         return WooCommerce.get("payment_gateways")
             .then((response) => {
-                console.log(response.data);
+                return response.data.map((rawData) => {
+                    if (rawData.enabled){
+                        return new PaymentGateway(rawData)
+                    } else {
+                        return null
+                    }
+                }).filter(x => x)
             })
             .catch((error) => {
                 console.log(error.response.data);
@@ -92,6 +101,34 @@ class OrderService {
             .catch((error) => {
                 console.log(error.response.data);
             });
+    }
+
+    getShippingZones = () => {
+        return WooCommerce.get("shipping/zones")
+            .then((response) => {
+                return response.data.map((rawData) => {
+                    return new ShippingZone(rawData)
+                })
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+            });
+    }
+
+    getShippingZoneMethods = (shippingZone) => {
+        if(!shippingZone || !shippingZone.id) {
+            return []
+        }
+
+        return WooCommerce.get(`shipping/zones/${shippingZone.id}/methods`)
+        .then((response) => {
+            return response.data.map((rawData) => {
+                return new ShippingZoneMethod(rawData)
+            })
+        })
+        .catch((error) => {
+            console.log(error.response.data);
+        });
     }
 }
 

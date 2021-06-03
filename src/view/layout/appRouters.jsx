@@ -55,9 +55,17 @@ function Routers() {
                 <Route path='/cart' exact>
                     <CartIndexPage />
                 </Route>
-                <Route path='/checkout' exact>
-                    <CheckoutPage />
-                </Route>
+                <Route path='/checkout' exact render={
+                    () => {
+                        if (customerService.isLoggedIn) {
+                            return (<CheckoutPage />)
+                        } else {
+                            alert('結帳前請先登入')
+
+                            return <Redirect to="/" />
+                        }
+                    }}
+                />
                 <Route path="/login" exact>
                     <CustomerLoginPage />
                 </Route>

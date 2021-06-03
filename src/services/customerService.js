@@ -50,7 +50,7 @@ class CustomerService {
     }
 
     get isLoggedIn () {
-        return this.getCustomerIdFromCookie() !== null
+        return !!this.getCustomerIdFromCookie()
     }
 
     getCustomerIdFromCookie = () => {
@@ -91,7 +91,7 @@ class CustomerService {
     }
 
     logOut = () => {
-        this.saveToCustomerStorage()
+        this.clearCustomerStorage()
     }
 
     signUp = (data) => {
